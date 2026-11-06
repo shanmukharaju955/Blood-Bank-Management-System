@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Blood Stock & Cryo-Inventory - BloodBank 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-box">
+          <i class="fas fa-hand-holding-droplet"></i>
+        </div>
+        <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/pages/about.html" class="nav-link">About</a></li>
+        <li><a href="/pages/donors.html" class="nav-link">Donors</a></li>
+        <li><a href="/pages/blood-stock.html" class="nav-link active">Blood Stock</a></li>
+        <li><a href="/pages/request-blood.html" class="nav-link">Request Blood</a></li>
+        <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/pages/admin-login.html" class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;">
+          <i class="fas fa-lock"></i> Staff Portal
+        </a>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Header -->
+  <section class="section-padding" style="padding-top: 60px; padding-bottom: 30px;">
+    <div class="container text-center" style="max-width: 820px;">
+      <span class="section-tag"><i class="fas fa-snowflake"></i> Live Cryogenic Vault Supply</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 14px;">
+        Certified Blood Reserves & <span class="gradient-text">Inventory Monitor</span>
+      </h1>
+      <p class="section-desc">
+        Track real-time clinical units across all 8 standard blood groups. Our automated biobank updates continually to ensure zero expired units are ever distributed to hospitals.
+      </p>
+    </div>
+  </section>
+
+  <!-- Low Stock Warning Banner -->
+  <section class="container" style="margin-bottom: 40px;">
+    <div class="low-stock-banner" id="low-stock-alert-box" style="display: none;">
+      <!-- Populated dynamically by stock.js if stock < 15 -->
+    </div>
+  </section>
+
+  <!-- 8 Blood Groups Cards Grid -->
+  <section class="container" style="margin-bottom: 70px;">
+    <div class="blood-grid" id="stock-cards-grid">
+      <!-- Populated by stock.js from /api/stock/summary -->
+    </div>
+  </section>
+
+  <!-- Blood Transfusion Compatibility Guide -->
+  <section class="container" style="margin-bottom: 70px;">
+    <div class="glass-card" style="padding: 36px;">
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px;">
+        <div style="width: 48px; height: 48px; background: var(--light-pink); border-radius: 12px; color: var(--primary-red); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+          <i class="fas fa-arrows-split-up-and-left"></i>
+        </div>
+        <div>
+          <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--dark);">Clinical Transfusion Compatibility Matrix</h3>
+          <p style="font-size: 0.88rem; color: #718096;">ABO and Rh(D) antigen compatibility guidelines for whole blood and packed red cell transfusions.</p>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Blood Group</th>
+              <th>Antigen Present</th>
+              <th>Antibody in Plasma</th>
+              <th>Can Safely Receive From</th>
+              <th>Can Safely Give To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-danger">O-</span></td>
+              <td>None (Universal Donor)</td>
+              <td>Anti-A, Anti-B</td>
+              <td><strong>O- only</strong></td>
+              <td><strong style="color: #059669;">All Blood Groups (Universal Red Cell Donor)</strong></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">O+</span></td>
+              <td>Rh factor only</td>
+              <td>Anti-A, Anti-B</td>
+              <td>O+, O-</td>
+              <td>O+, A+, B+, AB+</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">A-</span></td>
+              <td>A antigen</td>
+              <td>Anti-B</td>
+              <td>A-, O-</td>
+              <td>A+, A-, AB+, AB-</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">A+</span></td>
+              <td>A & Rh antigens</td>
+              <td>Anti-B</td>
+              <td>A+, A-, O+, O-</td>
+              <td>A+, AB+</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">B-</span></td>
+              <td>B antigen</td>
+              <td>Anti-A</td>
+              <td>B-, O-</td>
+              <td>B+, B-, AB+, AB-</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">B+</span></td>
+              <td>B & Rh antigens</td>
+              <td>Anti-A</td>
+              <td>B+, B-, O+, O-</td>
+              <td>B+, AB+</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">AB-</span></td>
+              <td>A & B antigens</td>
+              <td>None</td>
+              <td>AB-, A-, B-, O-</td>
+              <td>AB+, AB-</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-danger">AB+</span></td>
+              <td>A, B & Rh antigens</td>
+              <td>None (Universal Recipient)</td>
+              <td><strong style="color: #059669;">All Blood Groups (Universal Red Cell Recipient)</strong></td>
+              <td><strong>AB+ only</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Cold Storage Batch Inventory Table -->
+  <section class="section-padding" style="background: #FFFFFF;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span class="section-tag"><i class="fas fa-boxes-stacked"></i> Batch-Level Traceability</span>
+          <h2 style="font-size: 2.2rem; color: var(--dark);">Cold-Storage Vault Batches</h2>
+          <p style="color: #718096;">Track physical refrigeration units, unit counts, and precise expiration countdowns.</p>
+        </div>
+
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <label style="font-size: 0.88rem; font-weight: 600; color: #4A5568;" for="stock-status-select">Status Filter:</label>
+          <select id="stock-status-select" class="form-control" style="width: auto; padding: 8px 16px;">
+            <option value="All">All Batches</option>
+            <option value="healthy">Healthy (> 14 days)</option>
+            <option value="expiring">Expiring Soon (≤ 14 days)</option>
+            <option value="expired">Expired Batches</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="glass-card filter-bar">
+        <div class="filter-group">
+          <span style="font-weight: 700; font-size: 0.88rem; color: var(--dark); margin-right: 6px;">Filter Blood Group:</span>
+          <button class="filter-btn stock-filter-group active" data-group="All">All Groups</button>
+          <button class="filter-btn stock-filter-group" data-group="A+">A+</button>
+          <button class="filter-btn stock-filter-group" data-group="A-">A-</button>
+          <button class="filter-btn stock-filter-group" data-group="B+">B+</button>
+          <button class="filter-btn stock-filter-group" data-group="B-">B-</button>
+          <button class="filter-btn stock-filter-group" data-group="AB+">AB+</button>
+          <button class="filter-btn stock-filter-group" data-group="AB-">AB-</button>
+          <button class="filter-btn stock-filter-group" data-group="O+">O+</button>
+          <button class="filter-btn stock-filter-group" data-group="O-">O-</button>
+        </div>
+      </div>
+
+      <!-- Inventory Batches Table -->
+      <div class="glass-card" style="padding: 24px;">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Batch Number</th>
+                <th>Blood Group</th>
+                <th>Units In Batch</th>
+                <th>Storage Location</th>
+                <th>Expiration Date</th>
+                <th>Shelf Life Status</th>
+              </tr>
+            </thead>
+            <tbody id="stock-batches-tbody">
+              <!-- Rendered by stock.js from /api/stock -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon-box">
+              <i class="fas fa-hand-holding-droplet"></i>
+            </div>
+            <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+          </div>
+          <p class="footer-desc">
+            A state-of-the-art national blood logistics network bridging compassionate voluntary donors with intensive trauma facilities and hospital surgical theaters.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home Portal</a></li>
+            <li><a href="/pages/about.html">About Mission</a></li>
+            <li><a href="/pages/donors.html">Donor Directory</a></li>
+            <li><a href="/pages/blood-stock.html">Live Blood Stock</a></li>
+            <li><a href="/pages/request-blood.html">Request Blood</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Clinical Resources</h4>
+          <ul class="footer-links">
+            <li><a href="/pages/donors.html">Donor Guidelines</a></li>
+            <li><a href="/pages/blood-stock.html">Compatibility Matrix</a></li>
+            <li><a href="/pages/contact.html">Hospital Emergency</a></li>
+            <li><a href="/pages/admin-login.html">Staff Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Emergency Hotline</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>24/7 Emergency Dispatch:</strong><br>
+              <a href="tel:9063183329" style="color: #FFFFFF; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">
+                <i class="fas fa-phone-volume text-danger" style="font-size: 0.95rem; margin-right: 4px;"></i> 9063183329
+              </a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>clinical@bloodcare.org</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 BloodBank360 Medical Logistics. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/stock.js"></script>
+</body>
+</html>

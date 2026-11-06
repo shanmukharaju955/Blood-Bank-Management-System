@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Blood & Live Status Tracker - BloodBank 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-box">
+          <i class="fas fa-hand-holding-droplet"></i>
+        </div>
+        <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/pages/about.html" class="nav-link">About</a></li>
+        <li><a href="/pages/donors.html" class="nav-link">Donors</a></li>
+        <li><a href="/pages/blood-stock.html" class="nav-link">Blood Stock</a></li>
+        <li><a href="/pages/request-blood.html" class="nav-link active">Request Blood</a></li>
+        <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/pages/admin-login.html" class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;">
+          <i class="fas fa-lock"></i> Staff Portal
+        </a>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="section-padding" style="padding-top: 60px; padding-bottom: 30px;">
+    <div class="container text-center" style="max-width: 800px;">
+      <span class="section-tag"><i class="fas fa-ambulance"></i> Priority Hospital Supply</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 14px;">
+        Emergency & Planned <span class="gradient-text">Blood Requisition</span>
+      </h1>
+      <p class="section-desc">
+        Submit certified requisition orders for surgery, trauma, or maternity care. All requests are routed to our on-duty hematology team for immediate verification.
+      </p>
+    </div>
+  </section>
+
+  <!-- Split Screen: Request Form & Live Tracker -->
+  <section class="container" style="margin-bottom: 90px;">
+    <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 36px; align-items: start;">
+      
+      <!-- Requisition Form -->
+      <div class="glass-card" style="padding: 40px; border-top: 6px solid var(--primary-red);">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 24px;">
+          <div style="width: 48px; height: 48px; background: var(--light-pink); border-radius: 14px; color: var(--primary-red); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+            <i class="fas fa-file-waveform"></i>
+          </div>
+          <div>
+            <h3 style="font-size: 1.4rem; font-weight: 700; color: var(--dark);">Hospital Blood Requisition</h3>
+            <p style="font-size: 0.88rem; color: #718096;">Ensure patient identification matches hospital admission records.</p>
+          </div>
+        </div>
+
+        <form id="blood-request-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="req_patient_name">Patient Full Name <span class="required">*</span></label>
+              <input type="text" id="req_patient_name" class="form-control" placeholder="e.g. Ethan Walker" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="req_blood_group">Blood Group Required <span class="required">*</span></label>
+              <select id="req_blood_group" class="form-control" required>
+                <option value="">Select Blood Group</option>
+                <option value="A+">A Positive (A+)</option>
+                <option value="A-">A Negative (A-)</option>
+                <option value="B+">B Positive (B+)</option>
+                <option value="B-">B Negative (B-)</option>
+                <option value="AB+">AB Positive (AB+)</option>
+                <option value="AB-">AB Negative (AB-)</option>
+                <option value="O+">O Positive (O+)</option>
+                <option value="O-">O Negative (O-)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="req_units">Units Required (Pints) <span class="required">*</span></label>
+              <input type="number" id="req_units" class="form-control" min="1" max="25" value="1" placeholder="e.g. 2" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="req_urgency">Clinical Urgency Level <span class="required">*</span></label>
+              <select id="req_urgency" class="form-control" required>
+                <option value="Emergency (Immediate < 1 hr)">🚨 Emergency (Immediate &lt; 1 hr)</option>
+                <option value="Urgent (Within 6 hrs)">⚡ Urgent (Within 6 hrs)</option>
+                <option value="Planned Surgical (24-48 hrs)">🗓 Planned Surgical (24-48 hrs)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="req_hospital">Hospital Name, Ward & City <span class="required">*</span></label>
+            <input type="text" id="req_hospital" class="form-control" placeholder="e.g. St. Jude General Hospital, ICU Ward 4B, Springfield" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="req_contact">Attending Doctor / Coordinator Phone <span class="required">*</span></label>
+              <input type="tel" id="req_contact" class="form-control" placeholder="e.g. +1 (555) 443-8899" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="req_date">Requisition Date <span class="required">*</span></label>
+              <input type="date" id="req_date" class="form-control" required>
+            </div>
+          </div>
+
+          <div style="background: #F8FAFC; border: 1px dashed #CBD5E0; padding: 14px 18px; border-radius: var(--radius-md); font-size: 0.85rem; color: #4A5568; margin-bottom: 22px;">
+            <i class="fas fa-shield-alt text-primary"></i> <strong>Safe Stock Protocol:</strong> When approved by an administrator, units are verified for non-expiration and deducted atomically through a secure MySQL transaction.
+          </div>
+
+          <button type="submit" class="btn btn-emergency" style="width: 100%; padding: 14px; font-size: 1rem;">
+            <i class="fas fa-paper-plane"></i> Submit Clinical Requisition
+          </button>
+        </form>
+      </div>
+
+      <!-- Live Requisition Status Tracker -->
+      <div>
+        <div class="glass-card" style="padding: 36px; border-top: 6px solid #2563EB; margin-bottom: 30px;">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+            <div style="width: 46px; height: 46px; background: #EFF6FF; border-radius: 12px; color: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+              <i class="fas fa-magnifying-glass-location"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 1.35rem; font-weight: 700; color: var(--dark);">Track Request Status</h3>
+              <p style="font-size: 0.85rem; color: #718096;">Check progress using Request ID or Contact Phone.</p>
+            </div>
+          </div>
+
+          <form id="track-form" style="display: flex; gap: 10px; margin-bottom: 24px;">
+            <input type="text" id="track-query-input" class="form-control" placeholder="Enter Request ID or Phone #..." required>
+            <button type="submit" class="btn btn-primary" style="padding: 12px 20px;">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+
+          <!-- Tracker Results Box -->
+          <div id="tracker-results-container">
+            <div style="text-align: center; padding: 30px 10px; color: #94A3B8;">
+              <i class="fas fa-clipboard-question fa-3x" style="margin-bottom: 12px; color: #CBD5E0;"></i>
+              <p style="font-size: 0.92rem;">Enter your Request ID or registered contact phone number above to trace clinical fulfillment.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Requisition Status Reference Guide -->
+        <div class="glass-card" style="padding: 24px;">
+          <h4 style="font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 14px;">Lifecycle Reference Guide</h4>
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem;">
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span class="badge badge-warning" style="width: 85px; justify-content: center;">Pending</span>
+              <span style="color: #4A5568;">Requisition recorded in MySQL, queued for hematologist clinical review.</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span class="badge badge-info" style="width: 85px; justify-content: center;">Approved</span>
+              <span style="color: #4A5568;">Sufficient non-expired units verified and deducted from cold vaults.</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span class="badge badge-success" style="width: 85px; justify-content: center;">Fulfilled</span>
+              <span style="color: #4A5568;">Units dispatched in certified mobile cold-boxes and delivered to patient.</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span class="badge badge-danger" style="width: 85px; justify-content: center;">Rejected</span>
+              <span style="color: #4A5568;">Requisition cannot be filled due to medical incompatibility or cancellation.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon-box">
+              <i class="fas fa-hand-holding-droplet"></i>
+            </div>
+            <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+          </div>
+          <p class="footer-desc">
+            A state-of-the-art national blood logistics network bridging compassionate voluntary donors with intensive trauma facilities and hospital surgical theaters.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home Portal</a></li>
+            <li><a href="/pages/about.html">About Mission</a></li>
+            <li><a href="/pages/donors.html">Donor Directory</a></li>
+            <li><a href="/pages/blood-stock.html">Live Blood Stock</a></li>
+            <li><a href="/pages/request-blood.html">Request Blood</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Clinical Resources</h4>
+          <ul class="footer-links">
+            <li><a href="/pages/donors.html">Donor Guidelines</a></li>
+            <li><a href="/pages/blood-stock.html">Compatibility Matrix</a></li>
+            <li><a href="/pages/contact.html">Hospital Emergency</a></li>
+            <li><a href="/pages/admin-login.html">Staff Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Emergency Hotline</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>24/7 Emergency Dispatch:</strong><br>
+              <a href="tel:9063183329" style="color: #FFFFFF; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">
+                <i class="fas fa-phone-volume text-danger" style="font-size: 0.95rem; margin-right: 4px;"></i> 9063183329
+              </a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>clinical@bloodcare.org</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 BloodBank360 Medical Logistics. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Set default date to today
+    document.addEventListener('DOMContentLoaded', () => {
+      const dateInput = document.getElementById('req_date');
+      if (dateInput) {
+        dateInput.value = new Date().toISOString().split('T')[0];
+      }
+
+      // Pre-fill blood group if query param exists
+      const urlParams = new URLSearchParams(window.location.search);
+      const groupParam = urlParams.get('group');
+      if (groupParam) {
+        const select = document.getElementById('req_blood_group');
+        if (select) select.value = groupParam;
+      }
+
+      initRequisitionForm();
+      initTrackerForm();
+    });
+
+    // Handle Form Submission
+    function initRequisitionForm() {
+      const form = document.getElementById('blood-request-form');
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+
+        const payload = {
+          patient_name: document.getElementById('req_patient_name').value.trim(),
+          blood_group: document.getElementById('req_blood_group').value,
+          units_required: parseInt(document.getElementById('req_units').value, 10),
+          hospital_name: document.getElementById('req_hospital').value.trim(),
+          contact_number: document.getElementById('req_contact').value.trim(),
+          request_date: document.getElementById('req_date').value
+        };
+
+        try {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Submitting Requisition...`;
+
+          const res = await fetch('/api/requests', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            showToast(`Requisition #${data.request_id} created successfully!`, 'success');
+            form.reset();
+            document.getElementById('req_date').value = new Date().toISOString().split('T')[0];
+
+            // Auto-track the new request
+            document.getElementById('track-query-input').value = data.request_id;
+            performTracking(data.request_id);
+          } else {
+            showToast(data.message || 'Error creating request.', 'error');
+          }
+        } catch (err) {
+          showToast('Server connection error. Please try again.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      });
+    }
+
+    // Handle Tracker Search
+    function initTrackerForm() {
+      const form = document.getElementById('track-form');
+      if (!form) return;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const query = document.getElementById('track-query-input').value.trim();
+        if (query) performTracking(query);
+      });
+    }
+
+    async function performTracking(query) {
+      const container = document.getElementById('tracker-results-container');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div style="text-align: center; padding: 24px;">
+          <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
+          <p style="margin-top: 10px; font-size: 0.9rem; color: #718096;">Searching database records...</p>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(`/api/requests/track?query=${encodeURIComponent(query)}`);
+        const data = await res.json();
+
+        if (res.ok && data.success && data.data && data.data.length > 0) {
+          container.innerHTML = data.data.map(req => {
+            let statusBadge = `<span class="badge badge-warning"><i class="fas fa-clock"></i> Pending</span>`;
+            let step1 = 'active', step2 = '', step3 = '', step4 = '';
+
+            if (req.request_status === 'Approved') {
+              statusBadge = `<span class="badge badge-info"><i class="fas fa-check"></i> Approved</span>`;
+              step1 = 'active'; step2 = 'active'; step3 = 'active';
+            } else if (req.request_status === 'Fulfilled') {
+              statusBadge = `<span class="badge badge-success"><i class="fas fa-check-double"></i> Fulfilled</span>`;
+              step1 = 'active'; step2 = 'active'; step3 = 'active'; step4 = 'active';
+            } else if (req.request_status === 'Rejected') {
+              statusBadge = `<span class="badge badge-danger"><i class="fas fa-times"></i> Rejected</span>`;
+              step1 = 'active'; step2 = 'rejected';
+            }
+
+            return `
+              <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-md); padding: 20px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                  <div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: #718096;">REQUEST ID</span>
+                    <h4 style="font-size: 1.15rem; color: var(--dark); font-weight: 800;">#REQ-${String(req.request_id).padStart(4, '0')}</h4>
+                  </div>
+                  <div>${statusBadge}</div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.85rem; color: #4A5568; margin-bottom: 16px;">
+                  <div><strong>Patient:</strong> ${req.patient_name}</div>
+                  <div><strong>Blood Group:</strong> <span class="badge badge-danger">${req.blood_group}</span></div>
+                  <div><strong>Units:</strong> ${req.units_required} Units</div>
+                  <div><strong>Date:</strong> ${new Date(req.request_date).toLocaleDateString()}</div>
+                  <div style="grid-column: 1 / -1;"><strong>Hospital:</strong> ${req.hospital_name}</div>
+                </div>
+
+                <!-- Stepper Visual -->
+                <div style="display: flex; justify-content: space-between; position: relative; margin-top: 18px; padding: 0 10px;">
+                  <div style="text-align: center; width: 25%;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: #D7193F; color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">
+                      <i class="fas fa-file-check"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 700; color: #2D3748;">Submitted</span>
+                  </div>
+
+                  <div style="text-align: center; width: 25%;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: ${step2 === 'active' ? '#3B82F6' : (step2 === 'rejected' ? '#EF4444' : '#CBD5E0')}; color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">
+                      <i class="fas ${step2 === 'rejected' ? 'fa-times' : 'fa-user-doctor'}"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 700; color: #2D3748;">${step2 === 'rejected' ? 'Rejected' : 'Review'}</span>
+                  </div>
+
+                  <div style="text-align: center; width: 25%;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: ${step3 === 'active' ? '#2563EB' : '#CBD5E0'}; color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">
+                      <i class="fas fa-boxes-packing"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 700; color: #2D3748;">Allocated</span>
+                  </div>
+
+                  <div style="text-align: center; width: 25%;">
+                    <div style="width: 28px; height: 28px; border-radius: 50%; background: ${step4 === 'active' ? '#10B981' : '#CBD5E0'}; color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.75rem;">
+                      <i class="fas fa-truck-fast"></i>
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 700; color: #2D3748;">Dispatched</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #E2E8F0; display: flex; justify-content: flex-end;">
+                  <button type="button" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;" onclick="printRequisitionSlip('${req.request_id}', '${encodeURIComponent(req.patient_name)}', '${req.blood_group}', '${req.units_required}', '${encodeURIComponent(req.hospital_name)}', '${req.request_status}', '${req.request_date}')">
+                    <i class="fas fa-receipt"></i> Print Hospital Requisition Slip
+                  </button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        } else {
+          container.innerHTML = `
+            <div style="text-align: center; padding: 24px; color: #991B1B; background: #FEE2E2; border-radius: var(--radius-md);">
+              <i class="fas fa-triangle-exclamation fa-2x" style="margin-bottom: 8px;"></i>
+              <p style="font-weight: 600;">No record found matching "${query}".</p>
+              <p style="font-size: 0.82rem; margin-top: 4px;">Please check the phone number or request ID.</p>
+            </div>
+          `;
+        }
+      } catch (err) {
+        container.innerHTML = `<p class="text-danger text-center">Tracking service connection error.</p>`;
+      }
+    }
+
+    // Print Hospital Requisition Slip
+    window.printRequisitionSlip = function(id, pNameEnc, bloodGroup, units, hospEnc, status, reqDate) {
+      const pName = decodeURIComponent(pNameEnc);
+      const hospital = decodeURIComponent(hospEnc);
+      const formattedDate = new Date(reqDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+      const printWin = window.open('', '_blank', 'width=700,height=600');
+      printWin.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Requisition Slip - #REQ-${String(id).padStart(4, '0')}</title>
+          <style>
+            body { font-family: 'Arial', sans-serif; padding: 30px; color: #171923; }
+            .slip-card { border: 2px dashed #D7193F; border-radius: 12px; padding: 24px; max-width: 550px; margin: 0 auto; }
+            .slip-header { text-align: center; border-bottom: 2px solid #D7193F; padding-bottom: 12px; margin-bottom: 18px; }
+            .slip-header h2 { margin: 0 0 4px; color: #D7193F; }
+            .slip-header p { margin: 0; font-size: 13px; color: #64748b; }
+            .detail-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px; }
+            .badge { display: inline-block; padding: 4px 10px; border-radius: 4px; font-weight: bold; background: #FFF0F3; color: #D7193F; }
+            .barcode { height: 35px; background: repeating-linear-gradient(90deg, #171923 0, #171923 2px, transparent 2px, transparent 5px, #171923 5px, #171923 9px); margin-top: 16px; border-radius: 3px; }
+            .footer-note { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 20px; }
+          </style>
+        </head>
+        <body onload="window.print()">
+          <div class="slip-card">
+            <div class="slip-header">
+              <h2>BloodBank360 Medical Logistics</h2>
+              <p>Official Clinical Blood Requisition Receipt</p>
+            </div>
+            <div class="detail-row">
+              <span><strong>Requisition ID:</strong> #REQ-${String(id).padStart(4, '0')}</span>
+              <span><strong>Status:</strong> <span class="badge">${status}</span></span>
+            </div>
+            <div class="detail-row">
+              <span><strong>Patient Name:</strong> ${pName}</span>
+              <span><strong>Blood Group:</strong> <span class="badge">${bloodGroup}</span></span>
+            </div>
+            <div class="detail-row">
+              <span><strong>Units Allocated:</strong> ${units} Pints (450ml/unit)</span>
+              <span><strong>Date:</strong> ${formattedDate}</span>
+            </div>
+            <div class="detail-row">
+              <span><strong>Hospital / Ward:</strong> ${hospital}</span>
+            </div>
+            <div class="barcode"></div>
+            <div class="footer-note">
+              This slip confirms electronic reservation in the bio-vault. Carry this slip to the transfusion distribution desk.
+            </div>
+          </div>
+        </body>
+        </html>
+      `);
+      printWin.document.close();
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrative Medical Console - BloodBank 360</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- ==========================================
+         SIDEBAR NAVIGATION
+         ========================================== -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon-box">
+          <i class="fas fa-hand-holding-droplet"></i>
+        </div>
+        <div class="sidebar-brand-text">
+          BloodBank<span style="color: var(--primary-red);">360</span>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav">
+        <li class="nav-category">Main Navigation</li>
+        <li>
+          <a class="sidebar-link active" data-tab="overview">
+            <i class="fas fa-chart-line"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-tab="donors">
+            <i class="fas fa-users"></i>
+            <span>Manage Donors</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-tab="stock">
+            <i class="fas fa-snowflake"></i>
+            <span>Manage Blood Stock</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-tab="requests">
+            <i class="fas fa-file-waveform"></i>
+            <span>Blood Requests</span>
+            <span class="badge-counter" id="badge-pending-count">0</span>
+          </a>
+        </li>
+
+        <li class="nav-category">Analytics & System</li>
+        <li>
+          <a class="sidebar-link" data-tab="reports">
+            <i class="fas fa-file-medical-alt"></i>
+            <span>Clinical Reports</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" data-tab="settings">
+            <i class="fas fa-sliders"></i>
+            <span>System Settings</span>
+          </a>
+        </li>
+        <li>
+          <a class="sidebar-link" id="sidebar-logout-btn" style="color: #F87171;">
+            <i class="fas fa-arrow-right-from-bracket"></i>
+            <span>Sign Out</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Admin Mini Card -->
+      <div class="sidebar-footer">
+        <div class="admin-card-mini">
+          <div class="admin-avatar">
+            <i class="fas fa-user-doctor"></i>
+          </div>
+          <div class="admin-info">
+            <div class="admin-name admin-display-name">Dr. Sarah Mitchell</div>
+            <div class="admin-role admin-display-role">Chief Medical Officer</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         MAIN DASHBOARD BODY
+         ========================================== -->
+    <main class="dash-main">
+
+      <!-- Topbar Navigation -->
+      <header class="dash-topbar">
+        <div class="topbar-left">
+          <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Toggle navigation drawer">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="page-title-box">
+            <h2 id="page-title-text">Executive Overview</h2>
+            <p id="page-subtitle-text">Real-time blood bank metrics, reserve tracking, and live hospital requests.</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="db-status-pill online" id="db-status-pill">
+            <i class="fas fa-database"></i> Checking Connection...
+          </div>
+          <a href="/" target="_blank" class="portal-btn">
+            <i class="fas fa-arrow-up-right-from-square"></i> View Public Portal
+          </a>
+        </div>
+      </header>
+
+      <!-- Dashboard Content Tabs -->
+      <div class="dash-content">
+
+        <!-- ==========================================
+             TAB 1: OVERVIEW
+             ========================================== -->
+        <div class="tab-pane active" id="tab-overview">
+
+          <!-- 5 Top KPI Statistic Cards -->
+          <div class="dash-stats-grid">
+            <div class="kpi-card kpi-red">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Total Donors</span>
+                <div class="kpi-icon"><i class="fas fa-users"></i></div>
+              </div>
+              <div class="kpi-val" id="kpi-total-donors">0</div>
+              <div class="kpi-sub">Certified in registry</div>
+            </div>
+
+            <div class="kpi-card kpi-blue">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Blood Units</span>
+                <div class="kpi-icon"><i class="fas fa-snowflake"></i></div>
+              </div>
+              <div class="kpi-val" id="kpi-total-units">0</div>
+              <div class="kpi-sub">Non-expired reserve</div>
+            </div>
+
+            <div class="kpi-card kpi-amber">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Total Requests</span>
+                <div class="kpi-icon"><i class="fas fa-file-medical"></i></div>
+              </div>
+              <div class="kpi-val" id="kpi-total-requests">0</div>
+              <div class="kpi-sub">Hospital submissions</div>
+            </div>
+
+            <div class="kpi-card kpi-purple">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Pending Action</span>
+                <div class="kpi-icon"><i class="fas fa-clock"></i></div>
+              </div>
+              <div class="kpi-val" id="kpi-pending-requests">0</div>
+              <div class="kpi-sub">Awaiting verification</div>
+            </div>
+
+            <div class="kpi-card kpi-green">
+              <div class="kpi-card-header">
+                <span class="kpi-title">Approved / Fulfilled</span>
+                <div class="kpi-icon"><i class="fas fa-circle-check"></i></div>
+              </div>
+              <div class="kpi-val" id="kpi-approved-requests">0</div>
+              <div class="kpi-sub">Units safely allocated</div>
+            </div>
+          </div>
+
+          <!-- Low Stock Warning Banner -->
+          <div class="low-stock-banner" id="overview-low-stock-banner" style="display: none;">
+            <div class="banner-left">
+              <i class="fas fa-triangle-exclamation"></i>
+              <div class="banner-text">
+                <h4>Critical Low Stock Alert</h4>
+                <p>Blood groups falling below 15 units: <strong id="low-stock-groups-text">None</strong>. Immediate replenishment advised.</p>
+              </div>
+            </div>
+            <button class="btn btn-primary" onclick="document.querySelector('.sidebar-link[data-tab=\'stock\']').click()" style="padding: 8px 16px; font-size: 0.82rem;">
+              Manage Stock
+            </button>
+          </div>
+
+          <!-- Charts Grid (Chart.js) -->
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-header">
+                <div class="chart-title">Blood Group Stock Distribution (Units)</div>
+                <span class="badge badge-success"><i class="fas fa-sync-alt fa-spin"></i> Live Database</span>
+              </div>
+              <div class="chart-canvas-box">
+                <canvas id="chart-stock-distribution"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <div class="chart-title">Requisition Status Ratios</div>
+                <span class="badge badge-info">All Hospital Orders</span>
+              </div>
+              <div class="chart-canvas-box">
+                <canvas id="chart-requests-breakdown"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overview Tables Grid -->
+          <div class="dash-tables-grid">
+            <div class="panel-card">
+              <div class="panel-card-header">
+                <div class="panel-title">Recent Blood Requests</div>
+                <button class="btn btn-outline" style="padding: 6px 12px; font-size: 0.78rem;" onclick="document.querySelector('.sidebar-link[data-tab=\'requests\']').click()">
+                  View All Requests
+                </button>
+              </div>
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Req ID</th>
+                      <th>Patient</th>
+                      <th>Group</th>
+                      <th>Units</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="overview-requests-tbody">
+                    <!-- Populated by dashboard.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="panel-card-header">
+                <div class="panel-title">Recent Registered Donors</div>
+                <button class="btn btn-outline" style="padding: 6px 12px; font-size: 0.78rem;" onclick="document.querySelector('.sidebar-link[data-tab=\'donors\']').click()">
+                  View All Donors
+                </button>
+              </div>
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Group</th>
+                      <th>Phone</th>
+                      <th>Last Donated</th>
+                    </tr>
+                  </thead>
+                  <tbody id="overview-donors-tbody">
+                    <!-- Populated by dashboard.js -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ==========================================
+             TAB 2: MANAGE DONORS
+             ========================================== -->
+        <div class="tab-pane" id="tab-donors">
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h3 class="panel-title">Donor Registry Management</h3>
+                <p style="font-size: 0.85rem; color: #718096;">Add, update, or remove voluntary blood donors.</p>
+              </div>
+              <button class="btn btn-primary" onclick="openModal('modal-add-donor')">
+                <i class="fas fa-user-plus"></i> Add New Donor
+              </button>
+            </div>
+
+            <div style="padding: 20px 24px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+              <div style="position: relative; width: 340px;">
+                <input type="text" id="admin-donor-search" class="form-control" placeholder="Search donors by name, blood group, email..." style="padding-left: 38px;">
+                <i class="fas fa-search" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94A3B8;"></i>
+              </div>
+              <button class="btn btn-outline" onclick="loadDonorsTable()" style="padding: 10px 18px; font-size: 0.85rem;">
+                <i class="fas fa-rotate"></i> Refresh Donors
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Donor ID</th>
+                    <th>Donor Name</th>
+                    <th>Blood Group</th>
+                    <th>Gender & Age</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Last Donated</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-donors-tbody">
+                  <!-- Rendered by dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 3: MANAGE BLOOD STOCK
+             ========================================== -->
+        <div class="tab-pane" id="tab-stock">
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h3 class="panel-title">Blood Stock & Cold Vault Batches</h3>
+                <p style="font-size: 0.85rem; color: #718096;">Log new blood batches, update refrigeration units, and review expirations.</p>
+              </div>
+              <button class="btn btn-primary" onclick="openModal('modal-add-stock')">
+                <i class="fas fa-plus-circle"></i> Add Stock Batch
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Batch ID</th>
+                    <th>Blood Group</th>
+                    <th>Units In Batch</th>
+                    <th>Storage Location</th>
+                    <th>Expiration Date</th>
+                    <th>Shelf Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-stock-tbody">
+                  <!-- Rendered by dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 4: MANAGE BLOOD REQUESTS
+             ========================================== -->
+        <div class="tab-pane" id="tab-requests">
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h3 class="panel-title">Hospital Blood Requisitions</h3>
+                <p style="font-size: 0.85rem; color: #718096;">Review emergency orders. Approvals execute atomic FIFO deductions from non-expired stock.</p>
+              </div>
+              <button class="btn btn-outline" onclick="loadRequestsTable()" style="padding: 10px 18px; font-size: 0.85rem;">
+                <i class="fas fa-rotate"></i> Refresh Requisitions
+              </button>
+            </div>
+
+            <!-- Status Filter Bar -->
+            <div style="padding: 16px 24px; border-bottom: 1px solid var(--gray-200); display: flex; gap: 10px; align-items: center;">
+              <span style="font-weight: 700; font-size: 0.85rem; color: var(--dark);">Filter Status:</span>
+              <button class="filter-btn req-filter-btn active" data-status="All">All Requests</button>
+              <button class="filter-btn req-filter-btn" data-status="Pending">Pending</button>
+              <button class="filter-btn req-filter-btn" data-status="Approved">Approved</button>
+              <button class="filter-btn req-filter-btn" data-status="Fulfilled">Fulfilled</button>
+              <button class="filter-btn req-filter-btn" data-status="Rejected">Rejected</button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Request ID</th>
+                    <th>Patient Name & Contact</th>
+                    <th>Group</th>
+                    <th>Units</th>
+                    <th>Hospital & Ward</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Transactional Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-requests-tbody">
+                  <!-- Rendered by dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 5: REPORTS
+             ========================================== -->
+        <div class="tab-pane" id="tab-reports">
+          <div class="panel-card" style="padding: 32px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gray-200); padding-bottom: 20px; margin-bottom: 24px;">
+              <div>
+                <h3 style="font-size: 1.6rem; color: var(--dark-red); font-weight: 800;">BloodBank360 Clinical Audit Report</h3>
+                <p style="font-size: 0.88rem; color: #718096;">Generated on <span id="report-generated-date">-</span></p>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-outline" onclick="exportStockCSV()" style="padding: 10px 16px; font-size: 0.85rem;">
+                  <i class="fas fa-file-csv text-primary"></i> Export Stock CSV
+                </button>
+                <button class="btn btn-outline" onclick="exportDonorsCSV()" style="padding: 10px 16px; font-size: 0.85rem;">
+                  <i class="fas fa-file-csv text-success"></i> Export Donors CSV
+                </button>
+                <button class="btn btn-primary" onclick="printReport()" style="padding: 10px 18px; font-size: 0.85rem;">
+                  <i class="fas fa-print"></i> Print Official Report / PDF
+                </button>
+              </div>
+            </div>
+
+            <h4 style="font-size: 1.15rem; margin-bottom: 14px;">1. Blood Group Stock Reserves Summary</h4>
+            <div class="table-responsive" style="margin-bottom: 30px;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Blood Group</th>
+                    <th>Available Non-Expired Units</th>
+                    <th>Active Batches</th>
+                    <th>Nearest Expiration</th>
+                    <th>Reserve Level</th>
+                  </tr>
+                </thead>
+                <tbody id="report-stock-tbody">
+                  <!-- Rendered by dashboard.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 20px; border-radius: var(--radius-md);">
+              <h4 style="font-size: 1rem; color: var(--dark); margin-bottom: 8px;">Clinical Audit Certification</h4>
+              <p style="font-size: 0.85rem; color: #4A5568; line-height: 1.6;">
+                This audit report certifies that all listed whole blood, packed red cell, and plasma batches adhere to ISO 15189 biological containment standards. All batch deductions are verified via MySQL transactional consistency locks.
+              </p>
+              <div style="margin-top: 24px; display: flex; justify-content: space-between; font-size: 0.85rem; color: #718096; border-top: 1px dashed #CBD5E0; padding-top: 14px;">
+                <span>Authorized Signature: _______________________</span>
+                <span>Verification Seal: [OFFICIAL HEPO-SEAL]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 6: SETTINGS
+             ========================================== -->
+        <div class="tab-pane" id="tab-settings">
+          <div class="panel-card" style="padding: 36px; max-width: 780px;">
+            <h3 style="font-size: 1.45rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Administrator Profile & Security</h3>
+            <p style="font-size: 0.88rem; color: #718096; margin-bottom: 24px;">Manage your administrative display credentials and change your password.</p>
+
+            <form id="admin-profile-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="settings_fullname">Full Name</label>
+                  <input type="text" id="settings_fullname" class="form-control" value="Dr. Sarah Mitchell" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="settings_email">Email Address</label>
+                  <input type="email" id="settings_email" class="form-control" value="admin@bloodcare.org" required>
+                </div>
+              </div>
+
+              <div style="margin: 24px 0 16px; border-top: 1px solid var(--gray-200); padding-top: 18px;">
+                <h4 style="font-size: 1.1rem; color: var(--dark); margin-bottom: 6px;">Change Secure Password</h4>
+                <p style="font-size: 0.85rem; color: #718096; margin-bottom: 16px;">Leave blank if you do not wish to change your current password.</p>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="settings_current_pass">Current Password</label>
+                  <input type="password" id="settings_current_pass" class="form-control" placeholder="••••••••">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="settings_new_pass">New Password (Min. 6 characters)</label>
+                  <input type="password" id="settings_new_pass" class="form-control" placeholder="••••••••">
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; margin-top: 14px;">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-save"></i> Save Profile Settings
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==========================================
+       MODALS
+       ========================================== -->
+
+  <!-- Modal: Add New Donor -->
+  <div class="modal-overlay" id="modal-add-donor">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-user-plus text-danger"></i> Register New Donor</div>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="modal-add-donor-form">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" id="add_donor_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Age <span class="required">*</span></label>
+              <input type="number" id="add_donor_age" class="form-control" min="18" max="65" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Gender <span class="required">*</span></label>
+              <select id="add_donor_gender" class="form-control" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Blood Group <span class="required">*</span></label>
+              <select id="add_donor_blood_group" class="form-control" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Phone <span class="required">*</span></label>
+              <input type="tel" id="add_donor_phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email <span class="required">*</span></label>
+              <input type="email" id="add_donor_email" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Residential Address <span class="required">*</span></label>
+            <input type="text" id="add_donor_address" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Last Donation Date</label>
+            <input type="date" id="add_donor_last_date" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Donor Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Donor -->
+  <div class="modal-overlay" id="modal-edit-donor">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-user-pen text-primary"></i> Edit Donor Record</div>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="modal-edit-donor-form">
+        <input type="hidden" id="edit_donor_id">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" id="edit_donor_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Age</label>
+              <input type="number" id="edit_donor_age" class="form-control" min="18" max="65" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Gender</label>
+              <select id="edit_donor_gender" class="form-control" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Blood Group</label>
+              <select id="edit_donor_blood_group" class="form-control" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" id="edit_donor_phone" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" id="edit_donor_email" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Address</label>
+            <input type="text" id="edit_donor_address" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Last Donation Date</label>
+            <input type="date" id="edit_donor_last_date" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Donor Details</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Stock Batch -->
+  <div class="modal-overlay" id="modal-add-stock">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-boxes-stacked text-danger"></i> Add Blood Stock Batch</div>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="modal-add-stock-form">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Blood Group <span class="required">*</span></label>
+              <select id="add_stock_group" class="form-control" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Units Available (Pints) <span class="required">*</span></label>
+              <input type="number" id="add_stock_units" class="form-control" min="1" max="100" value="10" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Expiration Date <span class="required">*</span></label>
+            <input type="date" id="add_stock_expiry" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Storage Location / Cryo Unit <span class="required">*</span></label>
+            <input type="text" id="add_stock_location" class="form-control" placeholder="e.g. Cryo-Vault Alpha (Unit 3)" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Log Inventory Batch</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Stock Batch -->
+  <div class="modal-overlay" id="modal-edit-stock">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title"><i class="fas fa-pen-to-square text-primary"></i> Edit Blood Stock Batch</div>
+        <button class="modal-close">&times;</button>
+      </div>
+      <form id="modal-edit-stock-form">
+        <input type="hidden" id="edit_stock_id">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Blood Group</label>
+              <select id="edit_stock_group" class="form-control" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Units Available</label>
+              <input type="number" id="edit_stock_units" class="form-control" min="0" max="200" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Expiration Date</label>
+            <input type="date" id="edit_stock_expiry" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Storage Location / Unit</label>
+            <input type="text" id="edit_stock_location" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Batch Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodBank 360 - Donate Blood, Save Lives | Official Medical Blood Bank</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Glassmorphism Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-box">
+          <i class="fas fa-hand-holding-droplet"></i>
+        </div>
+        <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link active">Home</a></li>
+        <li><a href="/pages/about.html" class="nav-link">About</a></li>
+        <li><a href="/pages/donors.html" class="nav-link">Donors</a></li>
+        <li><a href="/pages/blood-stock.html" class="nav-link">Blood Stock</a></li>
+        <li><a href="/pages/request-blood.html" class="nav-link">Request Blood</a></li>
+        <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/pages/admin-login.html" class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;">
+          <i class="fas fa-lock"></i> Staff Portal
+        </a>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge animate-slide-up">
+          <i class="fas fa-shield-heart animate-heartbeat"></i> Certified Clinical Cold-Chain Supply
+        </div>
+        <h1 class="hero-title animate-slide-up">
+          Donate Blood, <br>
+          <span class="gradient-text">Save Lives.</span>
+        </h1>
+        <p class="hero-subtitle animate-slide-up">
+          Every second counts. A single voluntary donation can rescue up to three critically ill patients in trauma, oncology, and surgery. Experience a seamless, sterile, and compassionate blood logistics ecosystem.
+        </p>
+
+        <div class="hero-btn-group animate-slide-up">
+          <a href="/pages/donors.html" class="btn btn-primary">
+            <i class="fas fa-heart"></i> Become a Donor
+          </a>
+          <a href="/pages/request-blood.html" class="btn btn-emergency">
+            <i class="fas fa-truck-medical"></i> Emergency Request
+          </a>
+          <a href="/pages/blood-stock.html" class="btn btn-outline">
+            <i class="fas fa-chart-pie"></i> Check Live Stock
+          </a>
+        </div>
+
+        <div class="hero-trust-bar">
+          <div class="trust-item">
+            <i class="fas fa-circle-check trust-icon"></i>
+            <span>100% Sterile & FDA Audited</span>
+          </div>
+          <div class="trust-item">
+            <i class="fas fa-temperature-low trust-icon"></i>
+            <span>Real-time Cold Vault Monitoring</span>
+          </div>
+          <div class="trust-item">
+            <i class="fas fa-bolt trust-icon"></i>
+            <span>Rapid Hospital Dispatch</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Blood Bag Illustration Showcase -->
+      <div class="blood-bag-container">
+        <!-- Floating Badges -->
+        <div class="floating-badge floating-badge-1">
+          <div class="badge-icon">
+            <i class="fas fa-tint"></i>
+          </div>
+          <div>
+            <div class="badge-title">Universal Donor</div>
+            <div class="badge-value">Group O- Negative</div>
+          </div>
+        </div>
+
+        <div class="floating-badge floating-badge-2">
+          <div class="badge-icon" style="background: #DEF7EC; color: #03543F;">
+            <i class="fas fa-shield-virus"></i>
+          </div>
+          <div>
+            <div class="badge-title">Laboratory Safety</div>
+            <div class="badge-value">Pathogen Cleared</div>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Bag -->
+        <div class="blood-bag-wrapper">
+          <div class="bag-hanger">
+            <div class="bag-hole"></div>
+          </div>
+
+          <div class="blood-bag">
+            <!-- Fluid Level & Waves -->
+            <div class="blood-fluid">
+              <div class="liquid-wave"></div>
+              <div class="liquid-bubbles">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+              </div>
+            </div>
+
+            <!-- Graduations -->
+            <div class="bag-graduations">
+              <div class="grad-mark">100ml</div>
+              <div class="grad-mark">200ml</div>
+              <div class="grad-mark">300ml</div>
+              <div class="grad-mark">450ml</div>
+            </div>
+
+            <!-- Medical Label & Barcode -->
+            <div class="bag-label">
+              <div class="bag-blood-group">
+                <div>
+                  <div style="font-size: 0.65rem; font-weight: 700; color: #718096; letter-spacing: 0.05em;">WHOLE BLOOD CPD</div>
+                  <div class="group-tag">O+</div>
+                </div>
+                <span class="group-status"><i class="fas fa-check"></i> IN RESERVE</span>
+              </div>
+              <div class="bag-info-row">
+                <span>VOL: 450 mL ± 10%</span>
+                <span>TEMP: 2°C - 6°C</span>
+              </div>
+              <div class="bag-info-row">
+                <span>BATCH: #BB-9024-ALPHA</span>
+                <span>EXP: +35 DAYS</span>
+              </div>
+              <div class="bag-barcode"></div>
+            </div>
+
+            <!-- Bottom Tube and Port -->
+            <div class="bag-tube">
+              <div class="tube-clamp"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D Bag Interactive Blood Group Switcher -->
+        <div style="position: absolute; bottom: -70px; left: 50%; transform: translateX(-50%); width: 100%; max-width: 360px; text-align: center; z-index: 25;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: #718096; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">
+            <i class="fas fa-hand-pointer text-danger"></i> Interactive 3D Bio-Vault Inspector:
+          </div>
+          <div style="display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;" id="bag-group-chips">
+            <button type="button" class="bag-group-chip active" data-group="O+" data-status="IN RESERVE" data-vol="72%" data-batch="#BB-9024-ALPHA">O+</button>
+            <button type="button" class="bag-group-chip" data-group="O-" data-status="UNIVERSAL" data-vol="45%" data-batch="#BB-7712-EMERG">O-</button>
+            <button type="button" class="bag-group-chip" data-group="A+" data-status="HEALTHY" data-vol="85%" data-batch="#BB-3490-CRYO">A+</button>
+            <button type="button" class="bag-group-chip" data-group="A-" data-status="MODERATE" data-vol="38%" data-batch="#BB-1204-CHAM">A-</button>
+            <button type="button" class="bag-group-chip" data-group="B+" data-status="HEALTHY" data-vol="68%" data-batch="#BB-5521-UNIT">B+</button>
+            <button type="button" class="bag-group-chip" data-group="B-" data-status="LOW STOCK" data-vol="30%" data-batch="#BB-8890-VAULT">B-</button>
+            <button type="button" class="bag-group-chip" data-group="AB+" data-status="RECIPIENT" data-vol="55%" data-batch="#BB-6634-WING">AB+</button>
+            <button type="button" class="bag-group-chip" data-group="AB-" data-status="CRITICAL" data-vol="24%" data-batch="#BB-9901-ULTRA">AB-</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Stats Strip -->
+  <section class="stats-strip">
+    <div class="container">
+      <div class="glass-card stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-number" id="count-donors">0</div>
+          <div class="stat-label">Certified Active Donors</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="color: #2563EB; background: #EFF6FF;">
+            <i class="fas fa-cubes-stacked"></i>
+          </div>
+          <div class="stat-number" id="count-stock">0</div>
+          <div class="stat-label">Available Blood Units</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="color: #D97706; background: #FEF3C7;">
+            <i class="fas fa-file-medical"></i>
+          </div>
+          <div class="stat-number" id="count-requests">0</div>
+          <div class="stat-label">Total Blood Requests</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="color: #059669; background: #ECFDF5;">
+            <i class="fas fa-heart-pulse"></i>
+          </div>
+          <div class="stat-number" id="count-fulfilled">0</div>
+          <div class="stat-label">Lives Saved & Fulfilled</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Blood Group Availability Matrix -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-database"></i> Live Database Inventory</span>
+        <h2 class="section-title">Real-Time Blood Group Stock</h2>
+        <p class="section-desc">
+          Continuous synchronized monitoring of cold-storage reserves across all 8 major blood groups. Updated second-by-second from our medical vault.
+        </p>
+      </div>
+
+      <div class="blood-grid" id="home-stock-grid">
+        <!-- Rendered by main.js from /api/stock/summary -->
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+          <i class="fas fa-spinner fa-spin fa-2x text-danger"></i>
+          <p style="margin-top: 10px; color: #718096;">Syncing with laboratory database...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Donate Blood Section -->
+  <section class="section-padding" style="background: #FFFFFF;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-notes-medical"></i> Clinical Significance</span>
+        <h2 class="section-title">Why Blood Donation Matters</h2>
+        <p class="section-desc">
+          Blood cannot be manufactured synthetically. It is a rare, perishable biological gift that only human altruism can supply to patients in mortal jeopardy.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass-card feature-box glass-card-hover">
+          <div class="feature-icon-wrapper">
+            <i class="fas fa-ambulance"></i>
+          </div>
+          <h3 class="feature-title">Critical Trauma & Accidents</h3>
+          <p class="feature-desc">
+            Severe road accidents and acute trauma incidents often require upwards of 100 pints of transfused red blood cells and plasma within the first 6 hours of resuscitation.
+          </p>
+        </div>
+
+        <div class="glass-card feature-box glass-card-hover">
+          <div class="feature-icon-wrapper" style="background: #EFF6FF; color: #2563EB;">
+            <i class="fas fa-dna"></i>
+          </div>
+          <h3 class="feature-title">Oncology & Chemotherapy</h3>
+          <p class="feature-desc">
+            Cancer patients undergoing aggressive chemotherapy rely on frequent platelet transfusions to maintain vascular clotting integrity and stave off severe hemorrhaging.
+          </p>
+        </div>
+
+        <div class="glass-card feature-box glass-card-hover">
+          <div class="feature-icon-wrapper" style="background: #ECFDF5; color: #059669;">
+            <i class="fas fa-baby"></i>
+          </div>
+          <h3 class="feature-title">Maternal & Neonatal Care</h3>
+          <p class="feature-desc">
+            Postpartum complications, premature newborns, and pediatric cardiovascular surgeries critically depend on screened O-negative whole blood for survival.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-list-check"></i> Effortless Process</span>
+        <h2 class="section-title">How Blood Donation Works</h2>
+        <p class="section-desc">
+          Our streamlined 4-step medical protocol ensures maximal donor comfort, total sterile safety, and takes less than 30 minutes in total.
+        </p>
+      </div>
+
+      <div class="steps-container">
+        <div class="glass-card step-card glass-card-hover">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Quick Registration</h3>
+          <p class="step-desc">Fill out your donor profile online or at our certified donation center with basic health history.</p>
+        </div>
+
+        <div class="glass-card step-card glass-card-hover">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Health Screening</h3>
+          <p class="step-desc">Our nursing staff performs a gentle hemoglobin check, blood pressure, temperature, and pulse assessment.</p>
+        </div>
+
+        <div class="glass-card step-card glass-card-hover">
+          <div class="step-number">3</div>
+          <h3 class="step-title">10-Min Donation</h3>
+          <p class="step-desc">Relax comfortably while single-use, sterile collection technology draws 1 pint (450ml) of whole blood.</p>
+        </div>
+
+        <div class="glass-card step-card glass-card-hover">
+          <div class="step-number">4</div>
+          <h3 class="step-title">Refresh & Certificate</h3>
+          <p class="step-desc">Enjoy nutritious refreshments, receive your voluntary donor card, and track where your unit saves lives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Realistic Medical & Blood Donation Photographs Gallery -->
+  <section class="section-padding" style="background: #FFFFFF;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-camera"></i> Certified Facilities</span>
+        <h2 class="section-title">Inside Our Healthcare Network</h2>
+        <p class="section-desc">
+          Glimpse our clinical cold rooms, volunteer donation clinics, and state-of-the-art pathogen screening centers.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=800&q=80" alt="Blood Donation Clinic" class="gallery-img">
+          <div class="gallery-overlay">
+            <div class="gallery-tag">Voluntary Clinic</div>
+            <h4 class="gallery-title">Sterile Donor Lounge & Care</h4>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80" alt="Laboratory Analysis" class="gallery-img">
+          <div class="gallery-overlay">
+            <div class="gallery-tag">Clinical Laboratory</div>
+            <h4 class="gallery-title">Automated Immunohematology Testing</h4>
+          </div>
+        </div>
+
+        <div class="gallery-card">
+          <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80" alt="Hospital Intensive Care" class="gallery-img">
+          <div class="gallery-overlay">
+            <div class="gallery-tag">Trauma Surgery</div>
+            <h4 class="gallery-title">Immediate Emergency Transfusion</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real Donor & Patient Testimonials -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-quote-left"></i> Verified Stories</span>
+        <h2 class="section-title">Voices of Hope & Gratitude</h2>
+        <p class="section-desc">
+          Inspiring reflections from heroic recurring donors and recovered patients whose lives were restored.
+        </p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="glass-card testimonial-card glass-card-hover">
+          <div>
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="testimonial-text">
+              "When our daughter underwent emergent open-heart surgery, 4 units of rare AB- blood were prepared within 15 minutes by BloodBank360. You didn't just provide blood—you gave us our child back."
+            </p>
+          </div>
+          <div class="testimonial-user">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" alt="Elena Rostova" class="user-avatar">
+            <div>
+              <div class="user-name">Elena Rostova</div>
+              <div class="user-role">Mother of Pediatric Patient</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card testimonial-card glass-card-hover">
+          <div>
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="testimonial-text">
+              "I have donated O-negative blood 18 times over the last 5 years. Knowing that my 450ml donation goes straight to frontline trauma emergency units gives my life profound meaning."
+            </p>
+          </div>
+          <div class="testimonial-user">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="David Sterling" class="user-avatar">
+            <div>
+              <div class="user-name">David Sterling</div>
+              <div class="user-role">Regular 5-Year Donor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass-card testimonial-card glass-card-hover">
+          <div>
+            <i class="fas fa-quote-left quote-icon"></i>
+            <p class="testimonial-text">
+              "As a Chief Hematologist at City Memorial, the automated inventory tracking and instantaneous approval workflow has drastically reduced turnaround time for critical transfusions."
+            </p>
+          </div>
+          <div class="testimonial-user">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=120&q=80" alt="Dr. Julian Vance" class="user-avatar">
+            <div>
+              <div class="user-name">Dr. Julian Vance, MD</div>
+              <div class="user-role">Head of Emergency Medicine</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Callout Banner -->
+  <section class="container" style="margin-bottom: 90px;">
+    <div class="emergency-banner">
+      <div class="emergency-info">
+        <h3><i class="fas fa-bell animate-pulse-glow"></i> Facing an Acute Clinical Blood Shortage?</h3>
+        <p>Our rapid emergency dispatch coordination operates 24 hours a day, 365 days a year for verified hospitals.</p>
+      </div>
+      <div class="emergency-actions">
+        <a href="/pages/request-blood.html" class="btn btn-outline" style="background: #FFFFFF; color: var(--dark-red); border-color: #FFFFFF;">
+          <i class="fas fa-file-waveform"></i> Submit Urgent Request
+        </a>
+        <a href="tel:9063183329" class="btn btn-dark">
+          <i class="fas fa-phone"></i> Call Emergency: 9063183329
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comprehensive Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon-box">
+              <i class="fas fa-hand-holding-droplet"></i>
+            </div>
+            <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+          </div>
+          <p class="footer-desc">
+            A state-of-the-art national blood logistics network bridging compassionate voluntary donors with intensive trauma facilities and hospital surgical theaters.
+          </p>
+          <div style="display: flex; gap: 14px; font-size: 1.2rem; color: #A0AEC0;">
+            <a href="#" style="color: inherit;"><i class="fab fa-facebook"></i></a>
+            <a href="#" style="color: inherit;"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: inherit;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: inherit;"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Home Portal</a></li>
+            <li><a href="/pages/about.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> About Mission</a></li>
+            <li><a href="/pages/donors.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Donor Directory</a></li>
+            <li><a href="/pages/blood-stock.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Live Blood Stock</a></li>
+            <li><a href="/pages/request-blood.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Request Blood</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Clinical Resources</h4>
+          <ul class="footer-links">
+            <li><a href="/pages/donors.html#eligibility"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Donor Guidelines</a></li>
+            <li><a href="/pages/blood-stock.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Compatibility Charts</a></li>
+            <li><a href="/pages/contact.html#faqs"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Blood FAQs</a></li>
+            <li><a href="/pages/admin-login.html"><i class="fas fa-chevron-right" style="font-size: 0.7rem; margin-right: 6px;"></i> Hospital Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Emergency Hotline</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>24/7 Emergency Dispatch:</strong><br>
+              <a href="tel:9063183329" style="color: #FFFFFF; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">
+                <i class="fas fa-phone-volume text-danger" style="font-size: 0.95rem; margin-right: 4px;"></i> 9063183329
+              </a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <strong>Hospital Liaison:</strong><br>
+              clinical@bloodcare.org
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <strong>Central Vault:</strong><br>
+              450 Medical Sciences Blvd, Suite 100, Metro City
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 BloodBank360 Medical Logistics. All rights reserved. Registered Healthcare Non-Profit.</div>
+        <div>Engineered with Node.js, Express, MySQL & CSS 3D.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="bloodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D7193F" />
+      <stop offset="100%" stop-color="#8B1028" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#D7193F" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <path d="M50 10 C50 10 20 50 20 70 A30 30 0 0 0 80 70 C80 50 50 10 50 10 Z" fill="url(#bloodGrad)" filter="url(#shadow)" />
+  <rect x="44" y="52" width="12" height="28" rx="4" fill="#FFFFFF" opacity="0.9" />
+  <rect x="36" y="60" width="28" height="12" rx="4" fill="#FFFFFF" opacity="0.9" />
+</svg>

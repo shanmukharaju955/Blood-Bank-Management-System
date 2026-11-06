@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donors Registry & Enrollment - BloodBank 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-box">
+          <i class="fas fa-hand-holding-droplet"></i>
+        </div>
+        <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/pages/about.html" class="nav-link">About</a></li>
+        <li><a href="/pages/donors.html" class="nav-link active">Donors</a></li>
+        <li><a href="/pages/blood-stock.html" class="nav-link">Blood Stock</a></li>
+        <li><a href="/pages/request-blood.html" class="nav-link">Request Blood</a></li>
+        <li><a href="/pages/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/pages/admin-login.html" class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;">
+          <i class="fas fa-lock"></i> Staff Portal
+        </a>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="section-padding" style="padding-top: 60px; padding-bottom: 40px;">
+    <div class="container text-center" style="max-width: 780px;">
+      <span class="section-tag"><i class="fas fa-heart-circle-plus"></i> Life-Saving Community</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 14px;">
+        Voluntary Donor <span class="gradient-text">Enrollment & Registry</span>
+      </h1>
+      <p class="section-desc">
+        Join over 10,000 verified voluntary heroes. Register yourself to donate blood or search certified donors ready to assist during clinical emergencies.
+      </p>
+    </div>
+  </section>
+
+  <!-- Donor Registration Form Container -->
+  <section class="container" style="margin-bottom: 80px;">
+    <div class="glass-card" style="padding: 44px; max-width: 920px; margin: 0 auto; border-top: 6px solid var(--primary-red);">
+      <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 28px;">
+        <div style="width: 50px; height: 50px; background: var(--light-pink); border-radius: 14px; color: var(--primary-red); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+          <i class="fas fa-user-plus"></i>
+        </div>
+        <div>
+          <h3 style="font-size: 1.5rem; color: var(--dark); font-weight: 700;">Donor Registration Form</h3>
+          <p style="font-size: 0.9rem; color: #718096;">All medical information is strictly encrypted under national health confidentiality standards.</p>
+        </div>
+      </div>
+
+      <form id="donor-register-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg_name">Full Legal Name <span class="required">*</span></label>
+            <input type="text" id="reg_name" class="form-control" placeholder="e.g. Alexander Wright" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg_age">Age (18 - 65) <span class="required">*</span></label>
+            <input type="number" id="reg_age" class="form-control" min="18" max="65" placeholder="e.g. 28" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg_gender">Biological Gender <span class="required">*</span></label>
+            <select id="reg_gender" class="form-control" required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg_blood_group">Blood Group <span class="required">*</span></label>
+            <select id="reg_blood_group" class="form-control" required>
+              <option value="">Select Blood Group</option>
+              <option value="A+">A Positive (A+)</option>
+              <option value="A-">A Negative (A-)</option>
+              <option value="B+">B Positive (B+)</option>
+              <option value="B-">B Negative (B-)</option>
+              <option value="AB+">AB Positive (AB+)</option>
+              <option value="AB-">AB Negative (AB-)</option>
+              <option value="O+">O Positive (O+)</option>
+              <option value="O-">O Negative (O-)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg_phone">Primary Phone Number <span class="required">*</span></label>
+            <input type="tel" id="reg_phone" class="form-control" placeholder="e.g. +1 (555) 234-5678" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg_email">Email Address <span class="required">*</span></label>
+            <input type="email" id="reg_email" class="form-control" placeholder="e.g. alex@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg_address">Complete Residential Address & City <span class="required">*</span></label>
+          <textarea id="reg_address" class="form-control" rows="2" placeholder="e.g. 742 Evergreen Terrace, Springfield, IL" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg_last_date">Last Blood Donation Date (Leave empty if first-time)</label>
+            <input type="date" id="reg_last_date" class="form-control">
+          </div>
+
+          <div class="form-group" style="display: flex; align-items: flex-end;">
+            <div style="background: var(--light-pink); padding: 12px 16px; border-radius: var(--radius-md); font-size: 0.85rem; color: var(--dark-red); border: 1px solid rgba(215, 25, 63, 0.2); width: 100%;">
+              <i class="fas fa-info-circle"></i> Donors must wait at least <strong>90 days</strong> between whole blood donations.
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 10px; display: flex; align-items: center; justify-content: flex-end; gap: 16px;">
+          <button type="reset" class="btn btn-outline" style="padding: 12px 24px;">Reset Form</button>
+          <button type="submit" class="btn btn-primary" style="padding: 12px 32px;">
+            <i class="fas fa-hand-holding-heart"></i> Register As A Voluntary Donor
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Certified Donors Directory Section -->
+  <section class="section-padding" id="donors-directory-section" style="background: #FFFFFF;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;">
+        <div>
+          <span class="section-tag"><i class="fas fa-address-book"></i> Active Registry</span>
+          <h2 style="font-size: 2.2rem; color: var(--dark);">Verified Voluntary Donors</h2>
+          <p style="color: #718096; font-size: 0.98rem;">Filter certified donors ready for direct or replacement clinical donation.</p>
+        </div>
+        <div>
+          <span class="badge badge-success" id="donors-count-badge" style="font-size: 0.95rem; padding: 8px 16px;">
+            Loading Donors...
+          </span>
+        </div>
+      </div>
+
+      <!-- Filter & Search Bar -->
+      <div class="glass-card filter-bar">
+        <div class="filter-group">
+          <span style="font-weight: 700; font-size: 0.88rem; color: var(--dark); margin-right: 6px;">Filter Blood Group:</span>
+          <button class="filter-btn active" data-group="All">All Groups</button>
+          <button class="filter-btn" data-group="A+">A+</button>
+          <button class="filter-btn" data-group="A-">A-</button>
+          <button class="filter-btn" data-group="B+">B+</button>
+          <button class="filter-btn" data-group="B-">B-</button>
+          <button class="filter-btn" data-group="AB+">AB+</button>
+          <button class="filter-btn" data-group="AB-">AB-</button>
+          <button class="filter-btn" data-group="O+">O+</button>
+          <button class="filter-btn" data-group="O-">O-</button>
+        </div>
+
+        <div style="position: relative; min-width: 280px;">
+          <input type="text" id="donor-search-input" class="form-control" placeholder="Search by name, phone or city..." style="padding-left: 40px; padding-top: 10px; padding-bottom: 10px;">
+          <i class="fas fa-search" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94A3B8;"></i>
+        </div>
+      </div>
+
+      <!-- Donors Cards Grid -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;" id="donors-grid">
+        <!-- Rendered by donors.js from /api/donors -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon-box">
+              <i class="fas fa-hand-holding-droplet"></i>
+            </div>
+            <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+          </div>
+          <p class="footer-desc">
+            A state-of-the-art national blood logistics network bridging compassionate voluntary donors with intensive trauma facilities and hospital surgical theaters.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home Portal</a></li>
+            <li><a href="/pages/about.html">About Mission</a></li>
+            <li><a href="/pages/donors.html">Donor Directory</a></li>
+            <li><a href="/pages/blood-stock.html">Live Blood Stock</a></li>
+            <li><a href="/pages/request-blood.html">Request Blood</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Clinical Resources</h4>
+          <ul class="footer-links">
+            <li><a href="/pages/donors.html">Donor Guidelines</a></li>
+            <li><a href="/pages/blood-stock.html">Compatibility Matrix</a></li>
+            <li><a href="/pages/contact.html">Hospital Emergency</a></li>
+            <li><a href="/pages/admin-login.html">Staff Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Emergency Hotline</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>24/7 Emergency Dispatch:</strong><br>
+              <a href="tel:9063183329" style="color: #FFFFFF; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">
+                <i class="fas fa-phone-volume text-danger" style="font-size: 0.95rem; margin-right: 4px;"></i> 9063183329
+              </a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>clinical@bloodcare.org</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 BloodBank360 Medical Logistics. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/donors.js"></script>
+</body>
+</html>

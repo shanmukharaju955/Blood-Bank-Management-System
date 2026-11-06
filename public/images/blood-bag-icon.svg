@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <defs>
+    <linearGradient id="fluidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff3860" />
+      <stop offset="70%" stop-color="#D7193F" />
+      <stop offset="100%" stop-color="#8B1028" />
+    </linearGradient>
+    <linearGradient id="pvcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#f1f5f9" stop-opacity="0.5" />
+    </linearGradient>
+  </defs>
+  <!-- Bag Body -->
+  <rect x="25" y="30" width="150" height="230" rx="24" fill="url(#pvcGrad)" stroke="#e2e8f0" stroke-width="3" />
+  <!-- Hanger -->
+  <rect x="75" y="10" width="50" height="25" rx="8" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2" />
+  <circle cx="100" cy="22" r="7" fill="#ffffff" />
+  <!-- Blood Fluid Level -->
+  <path d="M26 120 Q 60 110, 100 120 T 174 120 L 174 236 Q 174 259, 151 259 L 49 259 Q 26 259, 26 236 Z" fill="url(#fluidGrad)" />
+  <!-- Label -->
+  <rect x="45" y="60" width="110" height="65" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+  <text x="100" y="85" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#D7193F" text-anchor="middle">O+</text>
+  <text x="100" y="102" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#64748b" text-anchor="middle">WHOLE BLOOD 450ML</text>
+  <line x1="55" y1="112" x2="145" y2="112" stroke="#171923" stroke-width="2" stroke-dasharray="2, 2, 5, 2" />
+  <!-- Tube -->
+  <rect x="94" y="260" width="12" height="35" rx="6" fill="#D7193F" />
+  <rect x="88" y="275" width="24" height="10" rx="3" fill="#3B82F6" />
+</svg>

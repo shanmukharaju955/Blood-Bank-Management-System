@@ -1,0 +1,33 @@
+{
+  "name": "blood-bank-management-system",
+  "version": "1.0.0",
+  "description": "Professional 3D Blood Bank Management System with Node.js, Express, MySQL & Chart.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test-runner.js",
+    "init-db": "node database/init.js",
+    "seed": "node database/init.js"
+  },
+  "keywords": [
+    "blood-bank",
+    "healthcare",
+    "mysql",
+    "express",
+    "nodejs",
+    "3d",
+    "medical"
+  ],
+  "author": "BloodBank360 Medical Logistics",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "morgan": "^1.12.1",
+    "mysql2": "^3.24.6"
+  }
+}

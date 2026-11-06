@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Hospital Coordination - BloodBank 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-box">
+          <i class="fas fa-hand-holding-droplet"></i>
+        </div>
+        <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/pages/about.html" class="nav-link">About</a></li>
+        <li><a href="/pages/donors.html" class="nav-link">Donors</a></li>
+        <li><a href="/pages/blood-stock.html" class="nav-link">Blood Stock</a></li>
+        <li><a href="/pages/request-blood.html" class="nav-link">Request Blood</a></li>
+        <li><a href="/pages/contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/pages/admin-login.html" class="btn btn-outline" style="padding: 9px 18px; font-size: 0.85rem;">
+          <i class="fas fa-lock"></i> Staff Portal
+        </a>
+        <button class="menu-toggle" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="section-padding" style="padding-top: 60px; padding-bottom: 30px;">
+    <div class="container text-center" style="max-width: 800px;">
+      <span class="section-tag"><i class="fas fa-headset"></i> 24/7 Emergency Support</span>
+      <h1 class="hero-title" style="font-size: 2.8rem; margin-bottom: 14px;">
+        Get In Touch With <span class="gradient-text">Clinical Logistics</span>
+      </h1>
+      <p class="section-desc">
+        Connect with our hospital liaison office, organize a corporate or university donation camp, or inquire about emergency cold-chain distribution.
+      </p>
+    </div>
+  </section>
+
+  <!-- Split Screen: Contact Form & Coordinates -->
+  <section class="container" style="margin-bottom: 80px;">
+    <div style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: start;">
+      
+      <!-- Contact Form -->
+      <div class="glass-card" style="padding: 40px; border-top: 6px solid var(--primary-red);">
+        <h3 style="font-size: 1.5rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">Send Us A Message</h3>
+        <p style="font-size: 0.9rem; color: #718096; margin-bottom: 24px;">Our hospital liaison team typically responds within 30 minutes for urgent matters.</p>
+
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="contact_name">Your Name <span class="required">*</span></label>
+              <input type="text" id="contact_name" class="form-control" placeholder="Dr. Sarah Mitchell" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact_email">Email Address <span class="required">*</span></label>
+              <input type="email" id="contact_email" class="form-control" placeholder="sarah.m@hospital.org" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="contact_phone">Contact Phone</label>
+              <input type="tel" id="contact_phone" class="form-control" placeholder="+1 (555) 019-2834">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact_subject">Inquiry Subject <span class="required">*</span></label>
+              <select id="contact_subject" class="form-control" required>
+                <option value="Emergency Transfusion Inquiry">🚨 Emergency Transfusion Inquiry</option>
+                <option value="Corporate / Campus Donation Drive">🩸 Host a Blood Donation Drive</option>
+                <option value="Hospital Cold-Chain Partnership">🏥 Hospital Cold-Chain Partnership</option>
+                <option value="Volunteer & Phlebotomy Careers">💼 Volunteer & Careers</option>
+                <option value="General Question">💬 General Question</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="contact_message">Your Message / Specific Requirements <span class="required">*</span></label>
+            <textarea id="contact_message" class="form-control" rows="4" placeholder="Detail your clinical requirements, estimated units, or donation camp schedule..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 13px; font-size: 0.95rem;">
+            <i class="fas fa-paper-plane"></i> Dispatch Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Details & Map Placeholder -->
+      <div>
+        <div class="glass-card" style="padding: 34px; margin-bottom: 28px;">
+          <h4 style="font-size: 1.25rem; font-weight: 700; color: var(--dark); margin-bottom: 20px;">Headquarters & Central Vault</h4>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: var(--light-pink); color: var(--primary-red); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
+                <i class="fas fa-map-location-dot"></i>
+              </div>
+              <div>
+                <strong style="color: var(--dark); font-size: 0.95rem;">Address:</strong>
+                <p style="color: #4A5568; font-size: 0.88rem; line-height: 1.6;">
+                  450 Medical Sciences Blvd, Suite 100<br>
+                  Metropolitan Health District, IL 60611
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
+                <i class="fas fa-phone-volume"></i>
+              </div>
+              <div>
+                <strong style="color: var(--dark); font-size: 0.95rem;">Emergency Phone Hotline:</strong>
+                <p style="color: #4A5568; font-size: 0.88rem; line-height: 1.6;">
+                  24/7 Rapid Hotline: <a href="tel:9063183329" style="color: var(--primary-red); font-weight: 800; font-size: 1.1rem;">9063183329</a><br>
+                  Direct Hospital Dispatch: +91 9063183329
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 16px; align-items: flex-start;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: #ECFDF5; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">
+                <i class="fas fa-envelope-open-text"></i>
+              </div>
+              <div>
+                <strong style="color: var(--dark); font-size: 0.95rem;">Direct Emails:</strong>
+                <p style="color: #4A5568; font-size: 0.88rem; line-height: 1.6;">
+                  Clinical Emergency: <strong>urgent@bloodcare.org</strong><br>
+                  General Inquiries: info@bloodcare.org
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps Integration Placeholder -->
+        <div class="glass-card" style="padding: 16px; border-radius: var(--radius-lg); overflow: hidden; position: relative;">
+          <div style="width: 100%; height: 260px; background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); border-radius: var(--radius-md); position: relative; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
+            <div style="width: 52px; height: 52px; background: var(--primary-red); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: 0 10px 20px rgba(215, 25, 63, 0.4); animation: pulseGlow 2s infinite;">
+              <i class="fas fa-hospital"></i>
+            </div>
+            <div style="font-weight: 700; color: #1E293B; font-size: 1rem;">BloodBank360 Central Cryo-Vault</div>
+            <div style="font-size: 0.82rem; color: #475569;">Latitude: 41.8781° N, Longitude: 87.6298° W</div>
+            <span class="badge badge-success" style="margin-top: 4px;">
+              <i class="fas fa-location-arrow"></i> Google Maps Live Coordinates Active
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQs Accordion Section -->
+  <section class="section-padding" id="faqs" style="background: #FFFFFF;">
+    <div class="container" style="max-width: 860px;">
+      <div class="section-header">
+        <span class="section-tag"><i class="fas fa-circle-question"></i> Frequent Queries</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">Clinical answers to common questions about donation safety, intervals, and emergency eligibility.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="glass-card" style="padding: 24px; border-radius: var(--radius-md);">
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">
+            <i class="fas fa-question-circle text-danger" style="margin-right: 8px;"></i> How often can I safely donate blood?
+          </h4>
+          <p style="color: #4A5568; font-size: 0.92rem; line-height: 1.6;">
+            For standard whole blood donation (450ml), donors must wait at least <strong>90 days (12 weeks)</strong> between donations to allow complete red blood cell hemoglobin regeneration and iron stores recovery. Apheresis platelet donors may donate every 14 days.
+          </p>
+        </div>
+
+        <div class="glass-card" style="padding: 24px; border-radius: var(--radius-md);">
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">
+            <i class="fas fa-question-circle text-danger" style="margin-right: 8px;"></i> Is blood donation completely safe and sterile?
+          </h4>
+          <p style="color: #4A5568; font-size: 0.92rem; line-height: 1.6;">
+            Yes, 100%. All needle sets, blood collection bags, and tubing are factory sealed, gamma-sterilized, and strictly single-use. They are unsealed immediately before your donation and safely bio-incinerated immediately afterwards. There is zero risk of contracting any bloodborne infection.
+          </p>
+        </div>
+
+        <div class="glass-card" style="padding: 24px; border-radius: var(--radius-md);">
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">
+            <i class="fas fa-question-circle text-danger" style="margin-right: 8px;"></i> What should I do before coming in to donate?
+          </h4>
+          <p style="color: #4A5568; font-size: 0.92rem; line-height: 1.6;">
+            Drink plenty of water (at least 16 oz), consume an iron-rich, healthy meal 2-3 hours beforehand, avoid fatty foods, and bring a government photo ID. Avoid alcohol for 24 hours prior.
+          </p>
+        </div>
+
+        <div class="glass-card" style="padding: 24px; border-radius: var(--radius-md);">
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;">
+            <i class="fas fa-question-circle text-danger" style="margin-right: 8px;"></i> How does BloodBank360 prevent expired blood distribution?
+          </h4>
+          <p style="color: #4A5568; font-size: 0.92rem; line-height: 1.6;">
+            Our Node.js + MySQL backend performs strict database query constraints and transactional locks that categorically exclude batches where <code>expiry_date &lt; CURDATE()</code>. Expired units are systematically flagged for autologous plasma reprocessing or research disposal.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon-box">
+              <i class="fas fa-hand-holding-droplet"></i>
+            </div>
+            <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+          </div>
+          <p class="footer-desc">
+            A state-of-the-art national blood logistics network bridging compassionate voluntary donors with intensive trauma facilities and hospital surgical theaters.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home Portal</a></li>
+            <li><a href="/pages/about.html">About Mission</a></li>
+            <li><a href="/pages/donors.html">Donor Directory</a></li>
+            <li><a href="/pages/blood-stock.html">Live Blood Stock</a></li>
+            <li><a href="/pages/request-blood.html">Request Blood</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Clinical Resources</h4>
+          <ul class="footer-links">
+            <li><a href="/pages/donors.html">Donor Guidelines</a></li>
+            <li><a href="/pages/blood-stock.html">Compatibility Matrix</a></li>
+            <li><a href="/pages/contact.html">Hospital Emergency</a></li>
+            <li><a href="/pages/admin-login.html">Staff Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Emergency Hotline</h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <div>
+              <strong>24/7 Emergency Dispatch:</strong><br>
+              <a href="tel:9063183329" style="color: #FFFFFF; font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">
+                <i class="fas fa-phone-volume text-danger" style="font-size: 0.95rem; margin-right: 4px;"></i> 9063183329
+              </a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>clinical@bloodcare.org</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 BloodBank360 Medical Logistics. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form');
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+          showToast('Thank you! Your inquiry has been routed to our clinical coordination desk.', 'success');
+          form.reset();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Portal Authentication - BloodBank 360</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body style="min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between;">
+
+  <!-- Simple Header -->
+  <header style="padding: 24px 0; border-bottom: 1px solid var(--gray-200); background: #FFFFFF;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-box">
+          <i class="fas fa-hand-holding-droplet"></i>
+        </div>
+        <span>BloodBank<span style="color: var(--primary-red);">360</span></span>
+      </a>
+      <a href="/" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.85rem;">
+        <i class="fas fa-arrow-left"></i> Return to Public Site
+      </a>
+    </div>
+  </header>
+
+  <!-- Login Card Container -->
+  <main class="container" style="padding: 60px 20px; display: flex; align-items: center; justify-content: center; flex: 1;">
+    <div class="glass-card" style="width: 100%; max-width: 480px; padding: 44px; border-top: 6px solid var(--primary-red); box-shadow: var(--shadow-3d);">
+      
+      <div style="text-align: center; margin-bottom: 28px;">
+        <div style="width: 64px; height: 64px; background: var(--light-pink); color: var(--primary-red); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin: 0 auto 16px; box-shadow: 0 10px 20px rgba(215, 25, 63, 0.2);">
+          <i class="fas fa-lock"></i>
+        </div>
+        <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--dark); margin-bottom: 6px;">Staff Medical Portal</h2>
+        <p style="font-size: 0.88rem; color: #718096;">Authorized hospital logistics administrators & hematologists only.</p>
+      </div>
+
+      <!-- Quick Demo Credentials Banner -->
+      <div style="background: #F8FAFC; border: 1px dashed #CBD5E0; border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 24px;">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+          <i class="fas fa-key text-primary"></i> Default System Credentials:
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.82rem; color: #4A5568;">
+          <span>Username: <strong>admin</strong></span>
+          <span>Password: <strong>admin123</strong></span>
+        </div>
+        <button type="button" id="fill-demo-btn" style="background: none; border: none; color: var(--primary-red); font-size: 0.78rem; font-weight: 700; cursor: pointer; padding: 4px 0 0; text-decoration: underline;">
+          Click here to auto-fill demo credentials
+        </button>
+      </div>
+
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label class="form-label" for="login_username">Username</label>
+          <div style="position: relative;">
+            <input type="text" id="login_username" class="form-control" placeholder="Enter username..." required style="padding-left: 42px;">
+            <i class="fas fa-user" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94A3B8;"></i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login_password">Password</label>
+          <div style="position: relative;">
+            <input type="password" id="login_password" class="form-control" placeholder="Enter secure password..." required style="padding-left: 42px; padding-right: 42px;">
+            <i class="fas fa-shield-halved" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #94A3B8;"></i>
+            <button type="button" id="toggle-password-btn" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94A3B8; cursor: pointer;" aria-label="Toggle password view">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 13px; font-size: 1rem; margin-top: 10px;">
+          <i class="fas fa-right-to-bracket"></i> Authenticate & Enter Console
+        </button>
+      </form>
+
+      <div style="margin-top: 24px; text-align: center; font-size: 0.8rem; color: #718096;">
+        <i class="fas fa-user-shield"></i> Protected by Bcrypt Salted Hash Encryption & Session Guards
+      </div>
+    </div>
+  </main>
+
+  <!-- Simple Footer -->
+  <footer style="padding: 20px 0; border-top: 1px solid var(--gray-200); background: #FFFFFF; font-size: 0.85rem; color: #718096; text-align: center;">
+    &copy; 2026 BloodBank360 Medical Logistics. Hospital Administrative Division.
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('admin-login-form');
+      const toggleBtn = document.getElementById('toggle-password-btn');
+      const passInput = document.getElementById('login_password');
+      const fillDemoBtn = document.getElementById('fill-demo-btn');
+
+      // Toggle password visibility
+      if (toggleBtn && passInput) {
+        toggleBtn.addEventListener('click', () => {
+          const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+          passInput.setAttribute('type', type);
+          const icon = toggleBtn.querySelector('i');
+          icon.classList.toggle('fa-eye');
+          icon.classList.toggle('fa-eye-slash');
+        });
+      }
+
+      // Auto-fill demo credentials
+      if (fillDemoBtn) {
+        fillDemoBtn.addEventListener('click', () => {
+          document.getElementById('login_username').value = 'admin';
+          document.getElementById('login_password').value = 'admin123';
+        });
+      }
+
+      // Check URL parameters for errors
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('error') === 'session_expired') {
+        showToast('Your session has expired. Please sign in again.', 'warning');
+      } else if (params.get('error') === 'unauthorized') {
+        showToast('Administrative authorization required to access dashboard.', 'warning');
+      }
+
+      // Handle Form Submit
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+
+          const username = document.getElementById('login_username').value.trim();
+          const password = document.getElementById('login_password').value;
+
+          try {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Verifying Credentials...`;
+
+            const res = await fetch('/api/admin/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password })
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.success) {
+              showToast(`Welcome back, ${data.user.full_name}! Redirecting...`, 'success');
+              setTimeout(() => {
+                window.location.href = '/pages/admin-dashboard.html';
+              }, 600);
+            } else {
+              showToast(data.message || 'Authentication failed.', 'error');
+            }
+          } catch (err) {
+            console.error('Login error:', err);
+            showToast('Server connection error.', 'error');
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
